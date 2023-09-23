@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".Activity.UpdateNotes">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/UpdateNotesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Add Note"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/savebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/UpdateNotesTitle"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_baseline_done_24"
+            android:layout_marginEnd="10dp"/>
+
+
+
+        <EditText
+            android:id="@+id/updatenotesedittext"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/border_blue"
+            android:layout_below="@id/UpdateNotesTitle"
+            android:layout_marginTop="10dp"
+            android:hint="Enter the Title"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:fontFamily="@font/poppins"
+            />
+
+
+        <EditText
+            android:id="@+id/updatenotesdescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_blue"
+            android:layout_below="@id/updatenotesedittext"
+            android:layout_marginTop="10dp"
+            android:hint="Enter the description"
+            android:padding="10dp"
+            android:gravity="top"
+            android:textSize="18dp"
+            android:fontFamily="@font/poppins"
+            />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
