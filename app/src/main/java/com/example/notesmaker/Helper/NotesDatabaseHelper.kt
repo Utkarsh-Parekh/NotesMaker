@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.ContactsContract.CommonDataKinds.Note
 import android.util.Log
 import com.example.notesmaker.dataclass.Notes
 import kotlin.math.log
@@ -67,4 +68,44 @@ class NotesDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         return Notelist
 
     }
+
+    //code for update database on update
+    fun updateNotes(notes: Notes){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_TITLE,notes.title)
+            put(COLUMN_CONTENT,notes.content)
+        }
+
+        val whereclause  = "$COLUMN_ID"
+        val whereargs = arrayOf(notes.id.toString())
+
+        db.update(TABLE_NAME,values,COLUMN_ID + "=?", arrayOf(COLUMN_ID.toString()))
+        db.close()
+    }
+
+
+    fun getNoteById(noteid : Int) : Notes{
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = $noteid"
+        val cursor = db.rawQuery(query,null)
+        cursor.moveToFirst()
+        Log.d(TAG, "getnotebyid : Noteid is " + noteid)
+        val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
+        val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
+        val content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT))
+
+        cursor.close()
+        db.close()
+        return Notes(id,title,content)
+
+    }
+
+
+    fun deleteTask(id: Int){
+        val databasedelete = writableDatabase
+        val deleted = databasedelete.delete(TABLE_NAME, COLUMN_ID + "=?", arrayOf(id.toString()))
+        databasedelete.close()
+    }
+
 }

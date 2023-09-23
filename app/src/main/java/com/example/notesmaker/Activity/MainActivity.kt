@@ -10,7 +10,7 @@ import com.example.notesmaker.Helper.NotesDatabaseHelper
 import com.example.notesmaker.databinding.ActivityMainBinding
 import com.example.notesmaker.dataclass.Notes
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NotesAdapter.OnItemClickListnerrecyclerview {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var noteshelper : NotesDatabaseHelper
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         noteshelper = NotesDatabaseHelper(this)
-        adapterview = NotesAdapter(noteshelper.getAllNotes(),this)
+        adapterview = NotesAdapter(noteshelper.getAllNotes(),this,this)
 
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
         binding.recyclerview.adapter = adapterview
@@ -42,5 +42,15 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         adapterview.refreshingNotes(noteshelper.getAllNotes())
+    }
+
+    override fun Onitemclick(position: Int) {
+//        val iupdate : Intent = Intent(this,UpdateNotes::class.java)
+//        startActivity(iupdate)
+
+    }
+
+    override fun OnLongClick(position: Int) {
+        TODO("Not yet implemented")
     }
 }
